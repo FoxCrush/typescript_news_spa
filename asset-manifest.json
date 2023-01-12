@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/typescript_news_spa/static/js/main.e7f49cb8.js",
+    "index.html": "/typescript_news_spa/index.html",
+    "main.e7f49cb8.js.map": "/typescript_news_spa/static/js/main.e7f49cb8.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.e7f49cb8.js"
+  ]
+}
