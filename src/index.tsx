@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createHashRouter, RouterProvider } from "react-router-dom"; //HashRouter for GitHub Pages. Should be BrowserRouter otherwise
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 import Main from "./routes/main-view";
 import Article, { articleLoader } from "./routes/article-view";
 
@@ -21,6 +23,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
