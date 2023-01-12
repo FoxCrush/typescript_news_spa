@@ -5,6 +5,7 @@ import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import Main from "./routes/main-view";
 import Article, { articleLoader } from "./routes/article-view";
+import NotFoundView from "./routes/not-found-view";
 
 const router = createHashRouter([
   {
@@ -15,6 +16,10 @@ const router = createHashRouter([
     path: "/article",
     element: <Article />,
     loader: articleLoader,
+  },
+  {
+    path: "*",
+    element: <NotFoundView />,
   },
 ]);
 
