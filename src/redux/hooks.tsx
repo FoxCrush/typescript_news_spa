@@ -1,3 +1,4 @@
+//It's better to create typed versions of the useDispatch and useSelector according to Redux documentation
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "./store";
 

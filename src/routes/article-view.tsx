@@ -1,7 +1,8 @@
 import React from "react";
+import ArticleDetail from "../components/article-detail-component";
 
 export default function ArticleView() {
-  return <div>ArticleView</div>;
+  return <ArticleDetail />;
 }
 const articleLoader = () => {
   console.log("Loading Article View");

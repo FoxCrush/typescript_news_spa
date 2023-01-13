@@ -1,18 +1,22 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { selectorArticle, setArticleID } from "../redux/articleSlice";
+import { articleSelector, setArticleID } from "../redux/article-slice";
+import SearchForm from "../components/search-form-component";
 
 export default function MainView() {
-  const articleID = useAppSelector(selectorArticle);
+  //Bringing Redux action and value
+  const articleID = useAppSelector(articleSelector);
   const dispatch = useAppDispatch();
+
   const btnClickHandler = () => {
     dispatch(setArticleID(10));
   };
 
   return (
-    <>
+    <Fragment>
       <div>{`${articleID}`}</div>
       <button onClick={btnClickHandler}>Change redux store</button>
-    </>
+      <SearchForm />
+    </Fragment>
   );
 }
