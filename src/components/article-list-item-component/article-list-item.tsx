@@ -10,8 +10,20 @@ export default function ArticleCard() {
   const clickHandler = (evt: any) => {
     console.log(evt);
   };
+
   return (
-    <Card sx={{ minHeight: 530, minWidth: 400, borderRadius: 5 }}>
+    <Card
+      sx={{
+        flexBasis: "400px",
+        height: "530px",
+        widows: "400px",
+        borderRadius: "5px",
+        marginRight: "45px",
+        marginBottom: "45px",
+        border: "1px solid rgba(234, 234, 234, 1)",
+        boxShadow: "0px 8px 24px 0px rgba(0, 0, 0, 0.05)",
+      }}
+    >
       <Link to={"/article"} onClick={clickHandler}>
         <CardMedia
           component="img"

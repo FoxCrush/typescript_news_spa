@@ -7,6 +7,7 @@ const arr = [1, 2, 3, 4, 5, 6];
 export default function ArticlesList() {
   return (
     <Fragment>
+      <p className={styles.title}>Results: {arr.length}</p>
       <div className={styles.container}>
         {arr.map((item) => (
           <ArticleCard key={item} />
