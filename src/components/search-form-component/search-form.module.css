@@ -1,3 +1,9 @@
-.icon {
-  padding: 5%;
+@import "@fontsource/montserrat";
+.searchTitle {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
 }

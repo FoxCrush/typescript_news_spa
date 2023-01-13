@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import MagIcon from "../../media/mag-icon";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
+import styles from "./search-form.module.css";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -48,6 +49,7 @@ export default function InputWithIcon() {
   return (
     <Fragment>
       <Box sx={{ flexGrow: 1 }}>
+        <p className={styles.searchTitle}>Filter by keywords</p>
         <Search>
           <SearchIconWrapper>
             <MagIcon />
