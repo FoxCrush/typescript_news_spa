@@ -19,6 +19,7 @@ export const MagGlassIcon = () => {
 export default function MagIcon() {
   return (
     <Typography
+      component={"span"}
       sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
     >
       <MagGlassIcon sx={{ mr: 1, my: 0.5 }} />

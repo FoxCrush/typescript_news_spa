@@ -1,6 +1,6 @@
 import styles from "./article-detail.module.css";
-import React, { Fragment } from "react";
-import { Button, Box } from "@mui/material";
+import { Fragment } from "react";
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 import ArrowIcon from "../../media/arrow-left-icon";
