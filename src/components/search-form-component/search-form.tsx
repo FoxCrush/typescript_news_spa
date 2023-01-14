@@ -1,7 +1,7 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import MagIcon from "../../media/mag-icon";
+import MagIcon from "../../icons/mag-icon";
 import styles from "./search-form.module.css";
 import {
   Search,
@@ -12,8 +12,7 @@ import ArticlesList from "../articles-list-component/";
 import useFetchArticles from "../../services/fetch-hook";
 
 export default function InputWithIcon() {
-  const { response, loading, error } = useFetchArticles("articles");
-  console.log("first", response, loading, error);
+  const { response, loading } = useFetchArticles("articles");
   return (
     <Fragment>
       <Box sx={{ flexGrow: 1 }}>
@@ -33,7 +32,7 @@ export default function InputWithIcon() {
           <CircularProgress />
         </Box>
       ) : (
-        <ArticlesList />
+        <ArticlesList articlesArr={response} />
       )}
     </Fragment>
   );

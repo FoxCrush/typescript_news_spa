@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
-import ArrowIcon from "../../media/arrow-left-icon";
+import ArrowIcon from "../../icons/arrow-left-icon";
 export default function ArticleDetail() {
   return (
     <Fragment>

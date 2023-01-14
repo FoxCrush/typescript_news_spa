@@ -2,26 +2,25 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 axios.defaults.baseURL = "https://api.spaceflightnewsapi.net/v3/";
 
-const useFetchArticles = (qString: string) => {
-  const [response, setResponse] = useState(null);
-  const [error, setError] = useState("");
+const useFetchArticles = (qString = "") => {
+  const [response, setResponse] = useState<[] | null>(null);
   const [loading, setloading] = useState(true);
 
   useEffect(() => {
     axios
       .get(`/${qString}?_limit=6`)
-      .then((res) => {
-        setResponse(res.data);
+      .then((response) => {
+        setResponse(response.data);
       })
-      .catch((err) => {
-        setError(err);
+      .catch((error) => {
+        alert(error);
       })
       .finally(() => {
         setloading(false);
       });
   }, [qString]);
 
-  return { response, error, loading };
+  return { response, loading };
 };
 
 export default useFetchArticles;

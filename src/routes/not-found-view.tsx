@@ -1,4 +1,4 @@
-import image from "../media/404-image.jpg";
+import image from "../icons/404-image.jpg";
 
 export default function NotFoundView() {
   return (
