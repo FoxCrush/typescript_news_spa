@@ -2,7 +2,11 @@ import { Fragment } from "react";
 import Box from "@mui/material/Box";
 import MagIcon from "../../media/mag-icon";
 import styles from "./search-form.module.css";
-import { Search, SearchIconWrapper, StyledInputBase } from "./mui-styles";
+import {
+  Search,
+  SearchIconWrapper,
+  StyledInputBase,
+} from "./mui-styles-search-form";
 import ArticlesList from "../articles-list-component/";
 
 export default function InputWithIcon() {

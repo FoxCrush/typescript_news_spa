@@ -1,11 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./global.css";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { createHashRouter, RouterProvider } from "react-router-dom"; //HashRouter for GitHub Pages. Should be BrowserRouter otherwise
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import Main from "./routes/main-view";
-import Article, { articleLoader } from "./routes/article-view";
+import Article from "./routes/article-view";
 import NotFoundView from "./routes/not-found-view";
+import "@fontsource/montserrat";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: ["Montserrat", "serif"].join(","),
+  },
+});
 
 const router = createHashRouter([
   {
@@ -15,7 +24,6 @@ const router = createHashRouter([
   {
     path: "/article",
     element: <Article />,
-    loader: articleLoader,
   },
   {
     path: "*",
@@ -29,7 +37,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>
 );
