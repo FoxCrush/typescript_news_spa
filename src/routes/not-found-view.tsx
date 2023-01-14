@@ -1,4 +1,3 @@
-import React from "react";
 import image from "../media/404-image.jpg";
 
 export default function NotFoundView() {
