@@ -12,14 +12,17 @@ import { useFetchSingleArticle } from "../../services/fetch-hook";
 const initialArticle = {
   title: "string",
   summary: "string",
+  imageUrl: "string",
 };
 
 export default function ArticleDetail() {
   const articleID = String(useAppSelector(articleSelector));
   const { response, loading } = useFetchSingleArticle(articleID);
-  const [article, setArticle] = useState<{ title: string; summary: string }>(
-    initialArticle
-  );
+  const [article, setArticle] = useState<{
+    title: string;
+    summary: string;
+    imageUrl: string;
+  }>(initialArticle);
 
   useEffect(() => {
     if (response !== null) {
@@ -35,7 +38,13 @@ export default function ArticleDetail() {
         </Box>
       ) : (
         <>
-          <div className={styles.imageContainer}></div>
+          <div className={styles.imageContainer}>
+            <img
+              className={styles.coverImage}
+              alt={article.title}
+              src={article.imageUrl}
+            ></img>
+          </div>
           <div className={styles.contentContainer}>
             <div className={styles.articleContainer}>
               <Typography

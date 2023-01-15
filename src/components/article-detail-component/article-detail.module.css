@@ -1,22 +1,31 @@
 .imageContainer {
-  display: block;
+  /* display: block; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
   position: relative;
   top: 0;
   left: 0;
   height: 245px;
   background-color: rgb(170, 165, 165);
 }
+.coverImage {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+.contentContainer {
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: (100vw - 30px);
+  height: (100vh - 300px);
+}
 .articleContainer {
   background-color: #fff;
   border: 1px solid rgba(234, 234, 234, 1);
   box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.05);
   align-items: center;
-}
-.contentContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 150px 75px 35px 75px;
-  width: (100vw - 30px);
-  height: (100vh - 300px);
 }
