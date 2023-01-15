@@ -9,14 +9,14 @@ import {
   StyledInputBase,
 } from "./mui-styles-search-form";
 import ArticlesList from "../articles-list-component/";
-import { useFetchArticles } from "../../services/fetch-hook";
+import { useFetchFiltredArticles } from "../../services/fetch-hook";
 import IArticle from "../../interfaces/article-interface";
 
 export default function InputWithIcon() {
   const [queryString, setQueryString] = useState("");
 
   let articleArray: IArticle[] = [];
-  let { response, loading } = useFetchArticles();
+  let { response, loading } = useFetchFiltredArticles(queryString);
   if (Array.isArray(response)) {
     articleArray = response;
   } else {
