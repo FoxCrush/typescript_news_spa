@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import MagIcon from "../../icons/mag-icon";
@@ -13,12 +13,14 @@ import { useFetchArticles } from "../../services/fetch-hook";
 import IArticle from "../../interfaces/article-interface";
 
 export default function InputWithIcon() {
+  const [queryString, setQueryString] = useState("");
+
   let articleArray: IArticle[] = [];
   let { response, loading } = useFetchArticles();
   if (Array.isArray(response)) {
     articleArray = response;
   } else {
-    loading = true;
+    loading = true; //temporery
   }
 
   return (
@@ -30,6 +32,9 @@ export default function InputWithIcon() {
             <MagIcon />
           </SearchIconWrapper>
           <StyledInputBase
+            onChange={(e) => {
+              setQueryString(e.currentTarget.value);
+            }}
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
           />

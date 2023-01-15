@@ -7,34 +7,13 @@ const limitResponseItemsPerRequest = 6;
 const params = {
   _limit: limitResponseItemsPerRequest,
 };
-const useFetchArticles = () => {
+const useFetchArticles = (qString = "") => {
   const [response, setResponse] = useState<IArticle[] | null>(null);
   const [loading, setloading] = useState<boolean>(true);
 
   useEffect(() => {
     axios
-      .get("", { params })
-      .then((response) => {
-        setResponse(response.data);
-      })
-      .catch((error) => {
-        alert(error);
-      })
-      .finally(() => {
-        setloading(false);
-      });
-  }, []);
-
-  return { response, loading };
-};
-
-const useFetchSingleArticle = (qString = "") => {
-  const [response, setResponse] = useState<IArticle | null>(null);
-  const [loading, setloading] = useState<boolean>(true);
-
-  useEffect(() => {
-    axios
-      .get(`${qString}`)
+      .get(qString, { params })
       .then((response) => {
         setResponse(response.data);
       })
@@ -45,6 +24,27 @@ const useFetchSingleArticle = (qString = "") => {
         setloading(false);
       });
   }, [qString]);
+
+  return { response, loading };
+};
+
+const useFetchSingleArticle = (idString = "") => {
+  const [response, setResponse] = useState<IArticle | null>(null);
+  const [loading, setloading] = useState<boolean>(true);
+
+  useEffect(() => {
+    axios
+      .get(`${idString}`)
+      .then((response) => {
+        setResponse(response.data);
+      })
+      .catch((error) => {
+        alert(error);
+      })
+      .finally(() => {
+        setloading(false);
+      });
+  }, [idString]);
 
   return { response, loading };
 };
