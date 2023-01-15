@@ -7,17 +7,24 @@ import { Link } from "react-router-dom";
 import CalendarIcon from "../../icons/calendar-icon";
 import ArrowIcon from "../../icons/arrow-icon";
 import IArticle from "../../interfaces/article-interface";
+import { useAppDispatch } from "../../redux/hooks";
+import { setArticleID } from "../../redux/article-slice";
 
 type Props = { article: IArticle };
 
 export default function ArticleCard({ article }: Props) {
-  const clickHandler = (event: React.MouseEvent<HTMLElement>) => {
-    console.log(event.target);
-  };
+  //redux
+  const dispatch = useAppDispatch();
+  const clickHandler = (id: number) => dispatch(setArticleID(id));
 
   return (
-    <Card>
-      <Link to={`/article/${article.id}`} onClick={clickHandler}>
+    <Card id={`${article.id}`}>
+      <Link
+        to={`/article/${article.id}`}
+        onClick={() => {
+          clickHandler(article.id);
+        }}
+      >
         <CardMedia
           component="img"
           height="217"
@@ -46,7 +53,9 @@ export default function ArticleCard({ article }: Props) {
         <Button
           size="small"
           color="primary"
-          onClick={clickHandler}
+          onClick={() => {
+            clickHandler(article.id);
+          }}
           sx={{ display: "flex" }}
         >
           <Link to={`/article/${article.id}`}>Read more</Link>

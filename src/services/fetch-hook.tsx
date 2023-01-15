@@ -4,7 +4,7 @@ import IArticle from "../interfaces/article-interface";
 
 axios.defaults.baseURL = "https://api.spaceflightnewsapi.net/v3/";
 
-const useFetchArticles = (qString = "") => {
+const useFetchArticles = (qString = "articles") => {
   const [response, setResponse] = useState<IArticle[]>([]);
   const [loading, setloading] = useState<boolean>(true);
 
