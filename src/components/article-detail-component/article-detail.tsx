@@ -16,8 +16,12 @@ const initialArticle = {
 };
 
 export default function ArticleDetail() {
-  const articleID = String(useAppSelector(articleSelector));
+  let articleID = String(useAppSelector(articleSelector));
+  if (articleID === "0") {
+    articleID = JSON.parse(localStorage.getItem("LastStarArticleID") || "");
+  }
   const { response, loading } = useFetchSingleArticle(articleID);
+  const [articleLoading, setArticleLoading] = useState(true);
   const [article, setArticle] = useState<{
     title: string;
     summary: string;
@@ -26,13 +30,21 @@ export default function ArticleDetail() {
 
   useEffect(() => {
     if (response !== null) {
+      console.log("response", response);
       setArticle(response);
+      setArticleLoading(loading);
     }
-  }, [response]);
+  }, [loading, response]);
+
+  useEffect(() => {
+    if (articleID !== "0" || !articleID) {
+      localStorage.setItem("LastStarArticleID", JSON.stringify(articleID));
+    }
+  }, [articleID]);
 
   return (
     <Fragment>
-      {loading ? (
+      {articleLoading ? (
         <Box sx={{ display: "flex", justifyContent: "center", mt: "24px" }}>
           <CircularProgress />
         </Box>
