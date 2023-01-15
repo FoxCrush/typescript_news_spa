@@ -30,7 +30,6 @@ export default function ArticleDetail() {
 
   useEffect(() => {
     if (response !== null) {
-      console.log("response", response);
       setArticle(response);
       setArticleLoading(loading);
     }
