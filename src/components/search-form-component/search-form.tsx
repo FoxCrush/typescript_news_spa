@@ -9,10 +9,17 @@ import {
   StyledInputBase,
 } from "./mui-styles-search-form";
 import ArticlesList from "../articles-list-component/";
-import useFetchArticles from "../../services/fetch-hook";
+import { useFetchArticles } from "../../services/fetch-hook";
+import IArticle from "../../interfaces/article-interface";
 
 export default function InputWithIcon() {
-  const { response, loading } = useFetchArticles("articles");
+  let articleArray: IArticle[] = [];
+  let { response, loading } = useFetchArticles();
+  if (Array.isArray(response)) {
+    articleArray = response;
+  } else {
+    loading = true;
+  }
 
   return (
     <Fragment>
@@ -33,7 +40,7 @@ export default function InputWithIcon() {
           <CircularProgress />
         </Box>
       ) : (
-        <ArticlesList articlesArray={response} />
+        <ArticlesList articlesArray={articleArray} />
       )}
     </Fragment>
   );

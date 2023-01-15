@@ -1,5 +1,5 @@
 import styles from "./article-detail.module.css";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
@@ -7,10 +7,26 @@ import ArrowIcon from "../../icons/arrow-left-icon";
 import { articleSelector } from "../../redux/article-slice";
 import { useAppSelector } from "../../redux/hooks";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useFetchSingleArticle } from "../../services/fetch-hook";
+
+const initialArticle = {
+  title: "string",
+  summary: "string",
+};
 
 export default function ArticleDetail() {
   const articleID = String(useAppSelector(articleSelector));
-  const loading = false;
+  const { response, loading } = useFetchSingleArticle(articleID);
+  const [article, setArticle] = useState<{ title: string; summary: string }>(
+    initialArticle
+  );
+
+  useEffect(() => {
+    if (response !== null) {
+      setArticle(response);
+    }
+  }, [response]);
+
   return (
     <Fragment>
       {loading ? (
@@ -28,17 +44,14 @@ export default function ArticleDetail() {
                 component="p"
                 sx={{ textAlign: "center", mt: "35px" }}
               >
-                `Article ID is {articleID}`
+                {article.title}
               </Typography>
               <Typography
                 variant="body2"
                 color="text.secondary"
                 sx={{ margin: "50px 75px", textAlign: "start" }}
               >
-                Lizards are a widespread group of squamate reptiles, with over
-                6,000 s exercitationem magnam ut neque assumenda! Vitae
-                perspiciatis, dignissimos ad eveniet qui minima blanditiis
-                deleniti in iste sequi quis quam ut, quibusdam libero.
+                {article.summary}
               </Typography>
             </div>
             <Button

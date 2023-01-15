@@ -2,15 +2,39 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import IArticle from "../interfaces/article-interface";
 
-axios.defaults.baseURL = "https://api.spaceflightnewsapi.net/v3/";
-
-const useFetchArticles = (qString = "articles") => {
-  const [response, setResponse] = useState<IArticle[]>([]);
+axios.defaults.baseURL = "https://api.spaceflightnewsapi.net/v3/articles/";
+const limitResponseItemsPerRequest = 6;
+const params = {
+  _limit: limitResponseItemsPerRequest,
+};
+const useFetchArticles = () => {
+  const [response, setResponse] = useState<IArticle[] | null>(null);
   const [loading, setloading] = useState<boolean>(true);
 
   useEffect(() => {
     axios
-      .get(`/${qString}?_limit=6`)
+      .get("", { params })
+      .then((response) => {
+        setResponse(response.data);
+      })
+      .catch((error) => {
+        alert(error);
+      })
+      .finally(() => {
+        setloading(false);
+      });
+  }, []);
+
+  return { response, loading };
+};
+
+const useFetchSingleArticle = (qString = "") => {
+  const [response, setResponse] = useState<IArticle | null>(null);
+  const [loading, setloading] = useState<boolean>(true);
+
+  useEffect(() => {
+    axios
+      .get(`${qString}`)
       .then((response) => {
         setResponse(response.data);
       })
@@ -25,4 +49,4 @@ const useFetchArticles = (qString = "articles") => {
   return { response, loading };
 };
 
-export default useFetchArticles;
+export { useFetchArticles, useFetchSingleArticle };
