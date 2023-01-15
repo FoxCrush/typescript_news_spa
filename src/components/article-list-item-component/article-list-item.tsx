@@ -16,6 +16,15 @@ export default function ArticleCard({ article }: Props) {
   const dispatch = useAppDispatch();
   const clickHandler = (id: number) => dispatch(setArticleID(id));
 
+  const formatDate = (dateString: string) => {
+    const dateUTC = Date.parse(dateString);
+    const date = new Date(dateUTC);
+    return `${date.toLocaleString([], { month: "long" })} ${date.toLocaleString(
+      [],
+      { day: "numeric" }
+    )}th, ${date.toLocaleString([], { year: "numeric" })}`;
+  };
+
   return (
     <Card id={`${article.id}`}>
       <Link
@@ -38,7 +47,7 @@ export default function ArticleCard({ article }: Props) {
             sx={{ marginBottom: "25px", display: "flex" }}
           >
             <CalendarIcon />
-            {article.publishedAt}
+            {`${formatDate(article.publishedAt)}`}
           </Typography>
           <Typography gutterBottom variant="h5" component="p">
             {article.title}
