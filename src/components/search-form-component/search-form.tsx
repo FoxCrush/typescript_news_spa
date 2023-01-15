@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import MagIcon from "../../icons/mag-icon";
@@ -13,6 +13,7 @@ import useFetchArticles from "../../services/fetch-hook";
 
 export default function InputWithIcon() {
   const { response, loading } = useFetchArticles("articles");
+
   return (
     <Fragment>
       <Box sx={{ flexGrow: 1 }}>
@@ -32,7 +33,7 @@ export default function InputWithIcon() {
           <CircularProgress />
         </Box>
       ) : (
-        <ArticlesList articlesArr={response} />
+        <ArticlesList articlesArray={response} />
       )}
     </Fragment>
   );

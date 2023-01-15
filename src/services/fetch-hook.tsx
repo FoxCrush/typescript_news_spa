@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import IArticle from "../interfaces/article-interface";
+
 axios.defaults.baseURL = "https://api.spaceflightnewsapi.net/v3/";
 
 const useFetchArticles = (qString = "") => {
-  const [response, setResponse] = useState<[] | null>(null);
-  const [loading, setloading] = useState(true);
+  const [response, setResponse] = useState<IArticle[]>([]);
+  const [loading, setloading] = useState<boolean>(true);
 
   useEffect(() => {
     axios

@@ -1,16 +1,16 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import ArticleCard from "../article-list-item-component/";
 import styles from "./article-list.module.css";
 import IArticle from "../../interfaces/article-interface";
 
-export default function ArticlesList({ articlesArr }: any) {
-  console.log("articlesArr", articlesArr);
+type Props = { articlesArray: IArticle[] };
 
+export default function ArticlesList({ articlesArray }: Props) {
   return (
     <Fragment>
-      <p className={styles.title}>Results: {articlesArr.length}</p>
+      <p className={styles.title}>Results: {articlesArray.length}</p>
       <div className={styles.container}>
-        {articlesArr.map((article: any) => (
+        {articlesArray.map((article: any) => (
           <ArticleCard key={article.id} article={article} />
         ))}
       </div>

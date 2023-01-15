@@ -8,8 +8,9 @@ import CalendarIcon from "../../icons/calendar-icon";
 import ArrowIcon from "../../icons/arrow-icon";
 import IArticle from "../../interfaces/article-interface";
 
-export default function ArticleCard({ article }: any) {
-  console.log("article", article);
+type Props = { article: IArticle };
+
+export default function ArticleCard({ article }: Props) {
   const clickHandler = (event: React.MouseEvent<HTMLElement>) => {
     console.log(event.target);
   };
