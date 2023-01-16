@@ -1,4 +1,5 @@
 import { Card } from "./mui-styles-article-item";
+import Highlighter from "react-highlight-words";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Box, Button } from "@mui/material";
@@ -6,8 +7,9 @@ import { Link } from "react-router-dom";
 import CalendarIcon from "../../icons/calendar-icon";
 import ArrowIcon from "../../icons/arrow-icon";
 import IArticle from "../../interfaces/article-interface";
-import { useAppDispatch } from "../../redux/hooks";
-import { setArticleID } from "../../redux/article-slice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { searchStringSelector, setArticleID } from "../../redux/article-slice";
+import styles from "./highlight.module.css";
 
 type Props = { article: IArticle };
 
@@ -23,6 +25,17 @@ export default function ArticleCard({ article }: Props) {
       [],
       { day: "numeric" }
     )}th, ${date.toLocaleString([], { year: "numeric" })}`;
+  };
+  const formatSummaryString = (sumString: string) => {
+    if (sumString.length > 100) {
+      return `${sumString.substring(0, 100)}...`;
+    } else {
+      return sumString;
+    }
+  };
+
+  const formatTextToHighlight = (text: string) => {
+    return text.split(" ");
   };
 
   return (
@@ -50,14 +63,27 @@ export default function ArticleCard({ article }: Props) {
             {`${formatDate(article.publishedAt)}`}
           </Typography>
           <Typography gutterBottom variant="h5" component="p">
-            {article.title}
+            <Highlighter
+              highlightClassName={styles.highLighted}
+              searchWords={formatTextToHighlight(
+                useAppSelector(searchStringSelector)
+              )}
+              autoEscape={true}
+              textToHighlight={formatSummaryString(article.title)}
+            />
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {article.summary}
+            <Highlighter
+              highlightClassName={styles.highLighted}
+              searchWords={formatTextToHighlight(
+                useAppSelector(searchStringSelector)
+              )}
+              autoEscape={true}
+              textToHighlight={formatSummaryString(article.summary)}
+            />
           </Typography>
         </Box>
       </Link>
-
       <Button
         sx={{
           display: "flex",

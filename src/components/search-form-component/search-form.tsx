@@ -1,8 +1,10 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import MagIcon from "../../icons/mag-icon";
 import styles from "./search-form.module.css";
+import { useAppDispatch } from "../../redux/hooks";
+import { setSearchString } from "../../redux/article-slice";
 import {
   Search,
   SearchIconWrapper,
@@ -14,14 +16,18 @@ import IArticle from "../../interfaces/article-interface";
 
 export default function InputWithIcon() {
   const [queryString, setQueryString] = useState("");
+  const dispatch = useAppDispatch();
 
   let articleArray: IArticle[] = [];
   let { response, loading } = useFetchFiltredArticles(queryString);
   if (Array.isArray(response)) {
     articleArray = response;
   } else {
-    loading = true; //temporery
+    loading = true;
   }
+  useEffect(() => {
+    dispatch(setSearchString(queryString));
+  });
 
   return (
     <Fragment>
