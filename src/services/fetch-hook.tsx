@@ -14,7 +14,7 @@ const useFetchFiltredArticles = (qString = "") => {
       ...(limitResponseItemsPerRequest > 0 && {
         _limit: limitResponseItemsPerRequest,
       }),
-      ...(qString.length > 0 && { title_contains: qString }),
+      ...(qString.length > 0 && { title_contains: "" }),
       ...(qString.length > 0 && { summary_contains: qString }),
     };
   }, [qString]);
