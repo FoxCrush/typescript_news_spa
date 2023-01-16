@@ -5,7 +5,7 @@ import { debounce } from "lodash";
 
 axios.defaults.baseURL = "https://api.spaceflightnewsapi.net/v3/articles/";
 
-const limitResponseItemsPerRequest = 9; // restricted for development
+const limitResponseItemsPerRequest = 15; // restricted for development
 const useFetchFiltredArticles = (qString = "") => {
   const [response, setResponse] = useState<IArticle[] | null>(null);
   const [loading, setloading] = useState<boolean>(true);

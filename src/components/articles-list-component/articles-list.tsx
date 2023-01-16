@@ -13,11 +13,13 @@ export default function ArticlesList({ articlesArray }: Props) {
 
   //sorting articles that has search string in title first
   useEffect(() => {
-    articlesArray.sort((x) => (x.title.includes(searchString) ? -1 : 0));
-    setSortedArray(articlesArray);
+    setSortedArray(
+      articlesArray.sort((x) =>
+        x.title.toLowerCase().includes(searchString.toLowerCase()) ? -1 : 0
+      )
+    );
   }, [articlesArray, searchString]);
 
-  // console.log("sortArticles", sortArticles(["1", "2", "help", "3"], "help"));
   return (
     <Fragment>
       <p className={styles.title}>Results: {articlesArray.length}</p>
