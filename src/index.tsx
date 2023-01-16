@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "@fontsource/montserrat";
 import "./global.css";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { createHashRouter, RouterProvider } from "react-router-dom"; //HashRouter for GitHub Pages. Should be BrowserRouter otherwise
@@ -8,7 +9,7 @@ import { Provider } from "react-redux";
 import Main from "./routes/main-view";
 import Article from "./routes/article-view";
 import NotFoundView from "./routes/not-found-view";
-import "@fontsource/montserrat";
+// import(/* webpackPreload: true */ "@fontsource/montserrat");
 
 const theme = createTheme({
   typography: {

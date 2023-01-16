@@ -10,6 +10,7 @@ export const Search = styled("div")(({ theme }) => ({
   "&:hover": {
     boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
   },
+  marginTop: theme.spacing(2),
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "50%",
@@ -27,6 +28,7 @@ export const SearchIconWrapper = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
 }));
+
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: "100%",
   color: "inherit",

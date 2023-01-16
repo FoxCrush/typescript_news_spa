@@ -69,7 +69,7 @@ export default function ArticleDetail() {
               <Typography
                 variant="body2"
                 color="text.secondary"
-                sx={{ margin: "50px 75px", textAlign: "start" }}
+                sx={{ mt: "15px", textAlign: "start" }}
               >
                 {article.summary}
               </Typography>

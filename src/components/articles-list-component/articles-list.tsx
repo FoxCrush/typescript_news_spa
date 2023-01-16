@@ -4,6 +4,7 @@ import styles from "./article-list.module.css";
 import IArticle from "../../interfaces/article-interface";
 import { searchStringSelector } from "../../redux/article-slice";
 import { useAppSelector } from "../../redux/hooks";
+import { Box, Typography } from "@mui/material";
 
 type Props = { articlesArray: IArticle[] };
 
@@ -22,7 +23,23 @@ export default function ArticlesList({ articlesArray }: Props) {
 
   return (
     <Fragment>
-      <p className={styles.title}>Results: {articlesArray.length}</p>
+      <Box
+        sx={{
+          margin: "40px 0 0 75px",
+        }}
+      >
+        <Typography
+          sx={{
+            fontSize: "16px",
+            fontWeight: "600",
+            lineHeight: "20px",
+            letterSpacing: "0em",
+            textAlign: "left",
+          }}
+        >
+          Results: {articlesArray.length}
+        </Typography>
+      </Box>
       <div className={styles.container}>
         {sortedArray.map((article: any) => (
           <ArticleCard key={article.id} article={article} />

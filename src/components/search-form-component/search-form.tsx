@@ -2,7 +2,6 @@ import { Fragment, useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import MagIcon from "../../icons/mag-icon";
-import styles from "./search-form.module.css";
 import { useAppDispatch } from "../../redux/hooks";
 import { setSearchString } from "../../redux/article-slice";
 import {
@@ -13,6 +12,7 @@ import {
 import ArticlesList from "../articles-list-component/";
 import { useFetchFiltredArticles } from "../../services/fetch-hook";
 import IArticle from "../../interfaces/article-interface";
+import { Typography } from "@mui/material";
 
 export default function InputWithIcon() {
   const [queryString, setQueryString] = useState("");
@@ -32,7 +32,20 @@ export default function InputWithIcon() {
   return (
     <Fragment>
       <Box sx={{ flexGrow: 1 }}>
-        <p className={styles.searchTitle}>Filter by keywords</p>
+        <Box sx={{ ml: "75px", mt: "50px" }}>
+          <Typography
+            sx={{
+              fontWeight: "600",
+              fontSize: "16px",
+              lineHeight: "20px",
+              letterSpacing: "0em",
+              textAlign: "left",
+            }}
+          >
+            Filter by keywords
+          </Typography>
+        </Box>
+
         <Search>
           <SearchIconWrapper>
             <MagIcon />
