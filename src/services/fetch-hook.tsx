@@ -6,6 +6,7 @@ import { debounce } from "lodash";
 axios.defaults.baseURL = "https://api.spaceflightnewsapi.net/v3/articles/";
 
 const limitResponseItemsPerRequest = 15; // restricted for development
+const sortArticlesRequestString = "id:desc"; //sort descending id according strapi docs.
 const useFetchFiltredArticles = (qString = "") => {
   const [response, setResponse] = useState<IArticle[] | null>(null);
   const [loading, setloading] = useState<boolean>(true);
@@ -13,6 +14,9 @@ const useFetchFiltredArticles = (qString = "") => {
     return {
       ...(limitResponseItemsPerRequest > 0 && {
         _limit: limitResponseItemsPerRequest,
+      }),
+      ...(sortArticlesRequestString.length > 0 && {
+        _sort: sortArticlesRequestString,
       }),
       ...(qString.length > 0 && { title_contains: "" }),
       ...(qString.length > 0 && { summary_contains: qString }),
