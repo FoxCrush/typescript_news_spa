@@ -3,7 +3,7 @@ import Highlighter from "react-highlight-words";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Box, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import CalendarIcon from "../../icons/calendar-icon";
 import ArrowIcon from "../../icons/arrow-icon";
 import IArticle from "../../interfaces/article-interface";
@@ -40,7 +40,7 @@ export default function ArticleCard({ article }: Props) {
 
   return (
     <Card id={`${article.id}`}>
-      <Link
+      <NavLink
         to={`/article/${article.id}`}
         onClick={() => {
           clickHandler(article.id);
@@ -83,7 +83,7 @@ export default function ArticleCard({ article }: Props) {
             />
           </Typography>
         </Box>
-      </Link>
+      </NavLink>
       <Button
         sx={{
           display: "flex",
@@ -97,8 +97,9 @@ export default function ArticleCard({ article }: Props) {
           clickHandler(article.id);
         }}
       >
-        <Link to={`/article/${article.id}`}>Read more</Link>
-        <ArrowIcon />
+        <NavLink style={{ display: "flex" }} to={`/article/${article.id}`}>
+          Read more <ArrowIcon />
+        </NavLink>
       </Button>
     </Card>
   );

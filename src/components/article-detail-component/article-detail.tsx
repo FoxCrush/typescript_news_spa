@@ -1,7 +1,7 @@
 import styles from "./article-detail.module.css";
 import { Fragment, useEffect, useState } from "react";
 import { Box, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Typography } from "@mui/material";
 import ArrowIcon from "../../icons/arrow-left-icon";
 import { articleSelector } from "../../redux/article-slice";
@@ -78,14 +78,15 @@ export default function ArticleDetail() {
               size="small"
               color="primary"
               sx={{
-                display: "flex",
                 mt: "35px",
                 ml: "75px",
                 mb: "45px",
               }}
             >
-              <ArrowIcon />
-              <Link to={"/"}>Back to home page</Link>
+              <NavLink style={{ display: "flex" }} to={"/"}>
+                <ArrowIcon />
+                Back to home page
+              </NavLink>
             </Button>
           </div>
         </>
