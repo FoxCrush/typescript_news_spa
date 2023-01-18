@@ -11,15 +11,17 @@ type Props = { articlesArray: IArticle[] };
 export default function ArticlesList({ articlesArray }: Props) {
   const [sortedArray, setSortedArray] = useState<IArticle[]>([]);
   const searchString = useAppSelector(searchStringSelector);
+  console.log("rerendering list");
 
   //sorting articles that has search string in title first
   useEffect(() => {
+    console.log("sorting list");
     setSortedArray(
       articlesArray.sort((x) =>
         x.title.toLowerCase().includes(searchString.toLowerCase()) ? -1 : 0
       )
     );
-  }, [articlesArray, searchString]);
+  }, [articlesArray]);
 
   return (
     <Fragment>

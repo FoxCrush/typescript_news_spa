@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import MagIcon from "../../icons/mag-icon";
@@ -19,6 +19,7 @@ export default function InputWithIcon() {
   const dispatch = useAppDispatch();
 
   let articleArray: IArticle[] = [];
+  console.log("rerender", queryString);
   let { response, loading } = useFetchFiltredArticles(queryString);
   if (Array.isArray(response)) {
     articleArray = response;
@@ -26,8 +27,14 @@ export default function InputWithIcon() {
     loading = true;
   }
   useEffect(() => {
+    // loading = true;
     dispatch(setSearchString(queryString));
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queryString]);
+
+  const stringChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQueryString(e.currentTarget.value);
+  };
 
   return (
     <Fragment>
@@ -51,9 +58,7 @@ export default function InputWithIcon() {
             <MagIcon />
           </SearchIconWrapper>
           <StyledInputBase
-            onChange={(e) => {
-              setQueryString(e.currentTarget.value);
-            }}
+            onChange={stringChangeHandler}
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
           />
