@@ -7,8 +7,8 @@ axios.defaults.baseURL = "https://api.spaceflightnewsapi.net/v3/articles/";
 
 const limitResponseItemsPerRequest = 15; // restricted for development
 const sortArticlesRequestString = "id:desc"; //sort descending id according strapi docs.
+
 const useFetchFiltredArticles = (qString = "") => {
-  console.log("fetching");
   const [response, setResponse] = useState<IArticle[] | null>(null);
   const [loading, setloading] = useState<boolean>(true);
   const params = useMemo(() => {
@@ -26,7 +26,7 @@ const useFetchFiltredArticles = (qString = "") => {
 
   const debouncedRequest = debounce(() => {
     fetch();
-  }, 400);
+  }, 40000);
   useEffect(() => {
     return () => {
       debouncedRequest.cancel();

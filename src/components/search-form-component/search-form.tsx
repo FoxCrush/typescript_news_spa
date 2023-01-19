@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, memo, useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import MagIcon from "../../icons/mag-icon";
@@ -14,18 +14,20 @@ import { useFetchFiltredArticles } from "../../services/fetch-hook";
 import IArticle from "../../interfaces/article-interface";
 import { Typography } from "@mui/material";
 
+const MemoList = memo(ArticlesList);
+
 export default function InputWithIcon() {
   const [queryString, setQueryString] = useState("");
   const dispatch = useAppDispatch();
 
   let articleArray: IArticle[] = [];
-  console.log("rerender", queryString);
   let { response, loading } = useFetchFiltredArticles(queryString);
   if (Array.isArray(response)) {
     articleArray = response;
   } else {
     loading = true;
   }
+
   useEffect(() => {
     // loading = true;
     dispatch(setSearchString(queryString));
@@ -69,7 +71,7 @@ export default function InputWithIcon() {
           <CircularProgress />
         </Box>
       ) : (
-        <ArticlesList articlesArray={articleArray} />
+        <MemoList articlesArray={articleArray} />
       )}
     </Fragment>
   );

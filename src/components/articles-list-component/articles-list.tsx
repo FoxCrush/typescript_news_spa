@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import ArticleCard from "../article-list-item-component/";
 import styles from "./article-list.module.css";
 import IArticle from "../../interfaces/article-interface";
@@ -11,16 +11,15 @@ type Props = { articlesArray: IArticle[] };
 export default function ArticlesList({ articlesArray }: Props) {
   const [sortedArray, setSortedArray] = useState<IArticle[]>([]);
   const searchString = useAppSelector(searchStringSelector);
-  console.log("rerendering list");
 
   //sorting articles that has search string in title first
-  useEffect(() => {
-    console.log("sorting list");
+  useMemo(() => {
     setSortedArray(
       articlesArray.sort((x) =>
         x.title.toLowerCase().includes(searchString.toLowerCase()) ? -1 : 0
       )
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [articlesArray]);
 
   return (
