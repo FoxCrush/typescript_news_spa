@@ -10,8 +10,10 @@ const sortArticlesRequestString = "id:desc"; //sort descending id according stra
 
 const useFetchFiltredArticles = (qString = "") => {
   const [response, setResponse] = useState<IArticle[] | null>(null);
-  const [loading, setloading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const params = useMemo(() => {
+    setLoading(true);
+
     return {
       ...(limitResponseItemsPerRequest > 0 && {
         _limit: limitResponseItemsPerRequest,
@@ -43,12 +45,11 @@ const useFetchFiltredArticles = (qString = "") => {
         alert(error);
       })
       .finally(() => {
-        setloading(false);
+        setLoading(false);
       });
   };
 
   useEffect(() => {
-    setloading(true);
     debouncedRequest();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [qString]);
@@ -58,7 +59,7 @@ const useFetchFiltredArticles = (qString = "") => {
 
 const useFetchSingleArticle = (idString = "") => {
   const [response, setResponse] = useState<IArticle | null>(null);
-  const [loading, setloading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     axios
@@ -70,7 +71,7 @@ const useFetchSingleArticle = (idString = "") => {
         alert(error);
       })
       .finally(() => {
-        setloading(false);
+        setLoading(false);
       });
   }, [idString]);
 

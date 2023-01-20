@@ -29,7 +29,6 @@ export default function InputWithIcon() {
   }
 
   useEffect(() => {
-    // loading = true;
     dispatch(setSearchString(queryString));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryString]);
