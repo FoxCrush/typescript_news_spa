@@ -48,6 +48,7 @@ const useFetchFiltredArticles = (qString = "") => {
   };
 
   useEffect(() => {
+    setloading(true);
     debouncedRequest();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [qString]);
