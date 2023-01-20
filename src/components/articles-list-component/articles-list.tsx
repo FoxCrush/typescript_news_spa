@@ -15,12 +15,18 @@ export default function ArticlesList({ articlesArray }: Props) {
   //sorting articles that has search string in title first
   useMemo(() => {
     setSortedArray(
-      articlesArray.sort((x) =>
-        x.title.toLowerCase().includes(searchString.toLowerCase()) ? -1 : 0
-      )
+      articlesArray.sort((x) => {
+        return x.title.toLowerCase().includes(searchString.toLowerCase())
+          ? -1
+          : 0;
+      })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [articlesArray]);
+
+  sortedArray.map((article: any) => (
+    <ArticleCard key={article.id} article={article} />
+  ));
 
   return (
     <Fragment>
@@ -42,9 +48,9 @@ export default function ArticlesList({ articlesArray }: Props) {
         </Typography>
       </Box>
       <div className={styles.container}>
-        {sortedArray.map((article: any) => (
-          <ArticleCard key={article.id} article={article} />
-        ))}
+        {articlesArray.map((article: any) => {
+          return <ArticleCard key={article.id} article={article} />;
+        })}
       </div>
     </Fragment>
   );

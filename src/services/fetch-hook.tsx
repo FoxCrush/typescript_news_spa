@@ -26,7 +26,7 @@ const useFetchFiltredArticles = (qString = "") => {
 
   const debouncedRequest = debounce(() => {
     fetch();
-  }, 40000);
+  }, 400);
   useEffect(() => {
     return () => {
       debouncedRequest.cancel();
