@@ -5,7 +5,7 @@ import { debounce } from "lodash";
 
 axios.defaults.baseURL = "https://api.spaceflightnewsapi.net/v3/articles/";
 
-const limitResponseItemsPerRequest = 15; // restricted for development
+const limitResponseItemsPerRequest = 12; // restricted for development
 const sortArticlesRequestString = "id:desc"; //sort descending id according strapi docs.
 
 const useFetchFiltredArticles = (qString = "") => {
