@@ -5,41 +5,66 @@ import { debounce } from "lodash";
 
 axios.defaults.baseURL = "https://api.spaceflightnewsapi.net/v3/articles/";
 
-const limitResponseItemsPerRequest = 12; // restricted for development
+type ArticlesInResponse = IArticle[];
+
+const limitResponseItemsPerRequest = 10; // restricted for development
 const sortArticlesRequestString = "id:desc"; //sort descending id according strapi docs.
 
 const useFetchFiltredArticles = (qString = "") => {
   const [response, setResponse] = useState<IArticle[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const params = useMemo(() => {
-    setLoading(true);
 
-    return {
-      ...(limitResponseItemsPerRequest > 0 && {
-        _limit: limitResponseItemsPerRequest,
-      }),
-      ...(sortArticlesRequestString.length > 0 && {
-        _sort: sortArticlesRequestString,
-      }),
-      ...(qString.length > 0 && { title_contains: "" }),
-      ...(qString.length > 0 && { summary_contains: qString }),
-    };
+  const multipleParams = useMemo(() => {
+    setLoading(true);
+    setResponse(null);
+    const keyWords = qString.split(" ");
+    return [
+      {
+        ...(limitResponseItemsPerRequest > 0 && {
+          _limit: 20,
+        }),
+        ...(sortArticlesRequestString.length > 0 && {
+          _sort: sortArticlesRequestString,
+        }),
+        ...(qString.length > 0 && { title_contains: keyWords }),
+      },
+      {
+        ...(limitResponseItemsPerRequest > 0 && {
+          _limit: limitResponseItemsPerRequest,
+        }),
+        ...(sortArticlesRequestString.length > 0 && {
+          _sort: sortArticlesRequestString,
+        }),
+        ...(qString.length > 0 && { summary_contains: keyWords }),
+      },
+    ];
   }, [qString]);
 
-  const debouncedRequest = debounce(() => {
-    fetch();
-  }, 400);
-  useEffect(() => {
-    return () => {
-      debouncedRequest.cancel();
-    };
-  }, [debouncedRequest]);
+  const filterSameArticles = (array: ArticlesInResponse[]) => {
+    const connectedArray = array.flat(1);
+    return [
+      ...new Map(connectedArray.map((item) => [item["id"], item])).values(),
+    ];
+  };
 
-  const fetch = () => {
+  const formPrioritizedList = (responses: ArticlesInResponse[]) => {
+    if (responses[0].length >= 20) {
+      setResponse(responses[0]);
+    } else {
+      setResponse(filterSameArticles(responses));
+    }
+  };
+
+  const fetchAll = () => {
+    const requests = multipleParams.map((params) =>
+      axios
+        .get<ArticlesInResponse>("", { params })
+        .then((response) => response.data)
+    );
     axios
-      .get("", { params })
-      .then((response) => {
-        setResponse(response.data);
+      .all(requests)
+      .then((responses) => {
+        formPrioritizedList(responses);
       })
       .catch((error) => {
         alert(error);
@@ -48,6 +73,15 @@ const useFetchFiltredArticles = (qString = "") => {
         setLoading(false);
       });
   };
+
+  const debouncedRequest = debounce(() => {
+    fetchAll();
+  }, 400);
+  useEffect(() => {
+    return () => {
+      debouncedRequest.cancel();
+    };
+  }, [debouncedRequest]);
 
   useEffect(() => {
     debouncedRequest();
