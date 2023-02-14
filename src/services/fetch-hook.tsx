@@ -17,7 +17,7 @@ const useFetchFiltredArticles = (qString = "") => {
   const multipleParams = useMemo(() => {
     setLoading(true);
     setResponse(null);
-    const keyWords = qString.split(" ");
+    const keyWords = qString.trim().split(" ");
     return [
       {
         ...(limitResponseItemsPerRequest > 0 && {
